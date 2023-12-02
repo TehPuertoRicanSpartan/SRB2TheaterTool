@@ -33,6 +33,7 @@
 	<source path="source" />
 	<assets path="assets" embed="true"/>
 	<assets path="movies" />
+	<assets path="other/github-help" rename="help"/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
