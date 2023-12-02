@@ -183,7 +183,7 @@ class ToolState extends FlxState
 		\n(https://github.com/TehPuertoRicanSpartan)
 		\n
 		\nLJ Sonic - Coding the original Theater Lua
-		\nApollyon - Making the original Theater map
+		\ndajumpette & VADaPEGA - The Theater map
 		\n
 		\nFabrice Bellard - Writing FFmpeg
 		\n(without it, this tool wouldn\'t be possible!)';
