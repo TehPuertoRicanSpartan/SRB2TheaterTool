@@ -119,6 +119,10 @@ class ToolState extends FlxState
 		tab1.add(aspectW);
 		aspectH = new FlxUINumericStepper((aspectW.x + aspectW.width) + 10, tabBox.y + 75, 1, 1, 1, 2160, 0);
 		tab1.add(aspectH);
+		var colon:FlxText = new FlxText((aspectW.x + aspectW.width) - 1, tabBox.y + 75, 0, ':', 8);
+		colon.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
+		colon.borderSize = 1;
+		tab1.add(colon);
 
 		var outWidthText:FlxText = new FlxText(0, tabBox.y + 60, 0, 'Output Width:', 8);
 		outWidthText.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
@@ -183,7 +187,7 @@ class ToolState extends FlxState
 		\n(https://github.com/TehPuertoRicanSpartan)
 		\n
 		\nLJ Sonic - Coding the original Theater Lua
-		\ndajumpette & VADaPEGA - The Theater map
+		\nApollyon - Making the original Theater map
 		\n
 		\nFabrice Bellard - Writing FFmpeg
 		\n(without it, this tool wouldn\'t be possible!)';
@@ -206,6 +210,9 @@ class ToolState extends FlxState
 
 		tab1.active = tab1.visible = tabBox.selected_tab == 0;
 		tab2.active = tab2.visible = tabBox.selected_tab == 1;
+
+		prefix.text = prefix.text.substr(0, 7);
+		audioName.text = audioName.text.substr(0, 6);
 	}
 
 	function convertMovie(file:String, fps:Int, aspectW:Int, aspectH:Int, outWidth:Int, prefix:String, audioFile:String)
@@ -222,7 +229,8 @@ class ToolState extends FlxState
 		var filename_temp3 = filename_temp2.split('.');
 		var filename:String = filename_temp3[0];
 
-		Sys.command('mkdir "movies/$filename"');
+		Sys.command('mkdir "movies/$filename/Music"');
+		Sys.command('mkdir "movies/$filename/Textures"');
 		Sys.command('./ffmpeg.exe', [
 			'-i',
 			file,
@@ -230,11 +238,11 @@ class ToolState extends FlxState
 			'${outWidth}x${calculatedHeight}',
 			'-r',
 			'$fps',
-			'movies/$filename/${prefix}%0${numberLength}d.png',
+			'movies/$filename/Textures/${prefix}%0${numberLength}d.png',
 			'-vn',
 			'-acodec',
 			'libvorbis',
-			'movies/$filename/O_${audioFile}.ogg'
+			'movies/$filename/Music/O_${audioFile}.ogg'
 		]);
 	}
 
