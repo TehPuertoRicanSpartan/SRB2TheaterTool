@@ -32,7 +32,7 @@ class ToolState extends FlxState
 	var aspectH:FlxUINumericStepper;
 
 	var outputWidthDropdown:FlxUIDropDownMenu;
-	var outputWidth:Int;
+	var outputWidth:Int = 120;
 
 	var fps:FlxUINumericStepper;
 
