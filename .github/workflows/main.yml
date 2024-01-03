@@ -43,5 +43,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: windowsBuild
+          name: SRB2MovieTool_Build
           path: export/windows/bin
