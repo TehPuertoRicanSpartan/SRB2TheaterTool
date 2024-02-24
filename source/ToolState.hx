@@ -238,6 +238,8 @@ class ToolState extends FlxState
 			'${outWidth}x${calculatedHeight}',
 			'-r',
 			'$fps',
+			'-start_number',
+			'0',
 			'movies/$filename/Textures/${prefix}%0${numberLength}d.png',
 			'-vn',
 			'-acodec',

@@ -4,7 +4,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="SRB2MovieTool" file="SRB2MovieTool" main="Main" version="GitHub Build 12/9/2023" company="TehPuertoRicanSpartan" />
+	<app title="SRB2MovieTool" file="SRB2MovieTool" main="Main" version="v0.2.0" company="TehPuertoRicanSpartan" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
