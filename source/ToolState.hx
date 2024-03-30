@@ -28,9 +28,6 @@ class ToolState extends FlxState
 
 	var videoPath:FlxUIInputText;
 
-	var aspectW:FlxUINumericStepper;
-	var aspectH:FlxUINumericStepper;
-
 	var outputWidthDropdown:FlxUIDropDownMenu;
 	var outputWidth:Int = 120;
 
@@ -111,20 +108,7 @@ class ToolState extends FlxState
 		pathText.screenCenter(X);
 		tab1.add(pathText);
 
-		var aspectText:FlxText = new FlxText(tabBox.x + 10, tabBox.y + 60, 0, 'Aspect Ratio:', 8);
-		aspectText.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
-		aspectText.borderSize = 1;
-		tab1.add(aspectText);
-		aspectW = new FlxUINumericStepper(tabBox.x + 10, tabBox.y + 75, 1, 1, 1, 3840, 0);
-		tab1.add(aspectW);
-		aspectH = new FlxUINumericStepper((aspectW.x + aspectW.width) + 10, tabBox.y + 75, 1, 1, 1, 2160, 0);
-		tab1.add(aspectH);
-		var colon:FlxText = new FlxText((aspectW.x + aspectW.width) - 1, tabBox.y + 75, 0, ':', 8);
-		colon.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
-		colon.borderSize = 1;
-		tab1.add(colon);
-
-		var outWidthText:FlxText = new FlxText(0, tabBox.y + 60, 0, 'Output Width:', 8);
+		var outWidthText:FlxText = new FlxText(0, tabBox.y + 10, 0, 'Output Width:', 8);
 		outWidthText.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
 		outWidthText.borderSize = 1;
 		outWidthText.screenCenter(X);
@@ -170,7 +154,7 @@ class ToolState extends FlxState
 		{
 			FlxG.sound.play('${path}sounds/DSS3K5B.ogg', 1, false, null, true, function()
 			{
-				convertMovie(videoPath.text, Std.int(fps.value), Std.int(aspectW.value), Std.int(aspectH.value), outputWidth, prefix.text, audioName.text);
+				convertMovie(videoPath.text, Std.int(fps.value), outputWidth, prefix.text, audioName.text);
 			});
 		});
 		convertButton.setLabelFormat(Util.getFont("sonic-2-system"), 8, 0xFF000000, CENTER, SHADOW, 0x3F000000);
@@ -215,12 +199,10 @@ class ToolState extends FlxState
 		audioName.text = audioName.text.substr(0, 6);
 	}
 
-	function convertMovie(file:String, fps:Int, aspectW:Int, aspectH:Int, outWidth:Int, prefix:String, audioFile:String)
+	function convertMovie(file:String, fps:Int, outWidth:Int, prefix:String, audioFile:String)
 	{
 		if (audioFile.length > 6)
 			audioFile = audioFile.substr(0, 6);
-
-		var calculatedHeight:Int = Math.round(outWidth * (aspectH / aspectW));
 
 		var numberLength = 8 - prefix.length;
 
@@ -234,8 +216,8 @@ class ToolState extends FlxState
 		Sys.command('./ffmpeg.exe', [
 			'-i',
 			file,
-			'-s:v',
-			'${outWidth}x${calculatedHeight}',
+			'-vf',
+			'"scale=$outWidth:-1"',
 			'-r',
 			'$fps',
 			'-start_number',
@@ -253,7 +235,7 @@ class ToolState extends FlxState
 		inVideo.removeEventListener(Event.SELECT, onFileSelected);
 		inVideo.removeEventListener(Event.CANCEL, onFileCancelled);
 
-		videoPath.text = '${inVideo.nativePath}';
+		videoPath.text = inVideo.nativePath;
 	}
 
 	private function onFileCancelled(_)
