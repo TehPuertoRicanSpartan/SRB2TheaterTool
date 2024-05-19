@@ -217,7 +217,7 @@ class ToolState extends FlxState
 			'-i',
 			file,
 			'-vf',
-			'"scale=$outWidth:-1"',
+			'scale=$outWidth:-1',
 			'-r',
 			'$fps',
 			'-start_number',
