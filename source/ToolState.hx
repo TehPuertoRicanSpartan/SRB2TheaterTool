@@ -11,6 +11,7 @@ import flixel.util.FlxColor;
 import lime.app.Application;
 import openfl.events.Event;
 import openfl.filesystem.File;
+import sys.FileSystem;
 
 class ToolState extends FlxState
 {
@@ -26,6 +27,7 @@ class ToolState extends FlxState
 	var tab1:FlxGroup;
 	var tab2:FlxText;
 
+	// main tab
 	var videoPath:FlxUIInputText;
 
 	var outputWidthDropdown:FlxUIDropDownMenu;
@@ -35,6 +37,9 @@ class ToolState extends FlxState
 
 	var prefix:FlxUIInputText;
 	var audioName:FlxUIInputText;
+
+	var luaID:FlxUIInputText;
+	var luaName:FlxUIInputText;
 
 	override public function create()
 	{
@@ -62,7 +67,7 @@ class ToolState extends FlxState
 		toolText.borderSize = 4;
 		toolText.screenCenter(X);
 		add(toolText);
-		var versionText:FlxText = new FlxText(0, toolText.y + (toolText.height - 6), 0, Application.current.meta.get('version'), 16);
+		var versionText:FlxText = new FlxText(0, toolText.y + (toolText.height - 6), 0, 'v' + Application.current.meta.get('version'), 16);
 		versionText.setFormat(Util.getFont("sonic-2-system"), 16, 0xFFFFFF00, LEFT, SHADOW, 0xFF272727);
 		versionText.borderSize = 2;
 		versionText.screenCenter(X);
@@ -102,16 +107,9 @@ class ToolState extends FlxState
 		browseButton.getLabel().borderSize = 1;
 		tab1.add(browseButton);
 
-		var pathText:FlxText = new FlxText(0, tabBox.y + 25, 0, 'Video Path:', 8);
-		pathText.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
-		pathText.borderSize = 1;
-		pathText.screenCenter(X);
-		tab1.add(pathText);
-
-		var outWidthText:FlxText = new FlxText(0, tabBox.y + 10, 0, 'Output Width:', 8);
+		var outWidthText:FlxText = new FlxText(tabBox.x + 80, tabBox.y + 60, 0, 'Output Width:', 8);
 		outWidthText.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
 		outWidthText.borderSize = 1;
-		outWidthText.screenCenter(X);
 		tab1.add(outWidthText);
 		outputWidthDropdown = new FlxUIDropDownMenu(outWidthText.x, tabBox.y + 75, FlxUIDropDownMenu.makeStrIdLabelArray(['120', '160', '180', '200']),
 			function(width:String)
@@ -162,10 +160,24 @@ class ToolState extends FlxState
 		convertButton.screenCenter(X);
 		tab1.add(convertButton);
 
+		var luaIDtext:FlxText = new FlxText(tabBox.x + 10, tabBox.y + 260, 0, 'Video ID:');
+		luaIDtext.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
+		tab1.add(luaIDtext);
+		luaID = new FlxUIInputText(luaIDtext.x, luaIDtext.y + 15, 185, '');
+		luaID.setFormat(Util.getFont("sonic-2-system"), 8, 0xFF272727, LEFT, NONE);
+		tab1.add(luaID);
+
+		var luaNameText:FlxText = new FlxText((luaID.x + luaID.width) + 10, tabBox.y + 260, 0, 'Video Title:');
+		luaNameText.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, LEFT, SHADOW, 0xFF272727);
+		tab1.add(luaNameText);
+		luaName = new FlxUIInputText(luaNameText.x, luaNameText.y + 15, 185, '');
+		luaName.setFormat(Util.getFont("sonic-2-system"), 8, 0xFF272727, LEFT, NONE);
+		tab1.add(luaName);
+
 		tab1.add(outputWidthDropdown);
 
 		// credits tab
-		var credits:String = 'CREDITS
+		var credits:String = "CREDITS
 		\n
 		\nTehPuertoRicanSpartan - Main Programmer of the Tool
 		\n(https://github.com/TehPuertoRicanSpartan)
@@ -174,7 +186,7 @@ class ToolState extends FlxState
 		\nApollyon - Making the original Theater map
 		\n
 		\nFabrice Bellard - Writing FFmpeg
-		\n(without it, this tool wouldn\'t be possible!)';
+		\n(without it, this tool wouldn't be possible!)";
 		tab2 = new FlxText(0, 0, tabBox.width, credits, 8);
 		tab2.setFormat(Util.getFont("sonic-2-system"), 8, 0xFFE4E4E4, CENTER, SHADOW, 0xFF272727);
 		tab2.screenCenter();
@@ -195,12 +207,13 @@ class ToolState extends FlxState
 		tab1.active = tab1.visible = tabBox.selected_tab == 0;
 		tab2.active = tab2.visible = tabBox.selected_tab == 1;
 
-		prefix.text = prefix.text.substr(0, 7);
-		audioName.text = audioName.text.substr(0, 6);
+		prefix.text = prefix.text.substr(0, 7).toUpperCase();
+		audioName.text = audioName.text.substr(0, 6).toUpperCase();
 	}
 
 	function convertMovie(file:String, fps:Int, outWidth:Int, prefix:String, audioFile:String)
 	{
+		// initialize everything else first
 		if (audioFile.length > 6)
 			audioFile = audioFile.substr(0, 6);
 
@@ -213,6 +226,7 @@ class ToolState extends FlxState
 
 		Sys.command('mkdir "movies/$filename/Music"');
 		Sys.command('mkdir "movies/$filename/Textures"');
+		Sys.command('mkdir "movies/$filename/Lua"');
 		Sys.command('./ffmpeg.exe', [
 			'-i',
 			file,
@@ -222,12 +236,48 @@ class ToolState extends FlxState
 			'$fps',
 			'-start_number',
 			'0',
-			'movies/$filename/Textures/${prefix}%0${numberLength}d.png',
+			'movies/$filename/Textures/$prefix%0${numberLength}d.png',
 			'-vn',
 			'-acodec',
 			'libvorbis',
-			'movies/$filename/Music/O_${audioFile}.ogg'
+			'movies/$filename/Music/O_$audioFile.ogg'
 		]);
+
+		// initialize the lua file
+		var prefixWithAsteriks:String = prefix;
+		for (i in 0...numberLength)
+			prefixWithAsteriks += '*';
+
+		var aspect:Array<String> = ((Util.getCommand('./ffprobe.exe', [
+			'-v',
+			'error',
+			'-select_streams',
+			'v:0',
+			'-show_entries',
+			'stream=display_aspect_ratio',
+			'-of',
+			'default=noprint_wrappers=1:nokey=1',
+			file
+		])).split(':'));
+		var height:Int = Std.int(Math.round((Std.parseFloat(aspect[1]) / Std.parseFloat(aspect[0])) * outWidth));
+
+		var duration:Int = Std.int(Math.round(Std.parseFloat(Util.getCommand('./ffprobe.exe', [
+			'-v',
+			'error',
+			'-show_entries',
+			'format=duration',
+			'-of',
+			'default=noprint_wrappers=1:nokey=1',
+			file
+		])) * 35));
+
+		var frames:Int = 0;
+		var items:Array<String> = FileSystem.readDirectory('./movies/$filename/Textures');
+		for (item in items)
+			frames++;
+
+		var luaFile:String = '/* Automatically generated by SRB2MovieTool v${Application.current.meta.get('version')} -- https://github.com/TehPuertoRicanSpartan/SRB2MovieTool */ theater.addMovie{id = "${luaID.text}", name = "${luaName.text}", duration = $duration, width = $outputWidth, height = $height, textures = "$prefixWithAsteriks", frames = ${frames - 1}, music = "${audioName.text}"}';
+		Util.writeTextToFile(luaFile, './movies/$filename/Lua/movie.lua');
 	}
 
 	private function onFileSelected(_)

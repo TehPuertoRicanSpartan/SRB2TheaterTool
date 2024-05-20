@@ -4,7 +4,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="SRB2MovieTool" file="SRB2MovieTool" main="Main" version="v0.2.0" company="TehPuertoRicanSpartan" />
+	<app title="SRB2MovieTool" file="SRB2MovieTool" main="Main" version="0.3.0" company="TehPuertoRicanSpartan" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
@@ -33,7 +33,6 @@
 	<source path="source" />
 	<assets path="assets" embed="true"/>
 	<assets path="movies" />
-	<assets path="other/github-help" rename="help"/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -85,6 +84,6 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
-	<icon path="other/icon16.png" size="16"/>
-	<icon path="other/icon.png"/>
+	<icon path="icon/icon16.png" size="16"/>
+	<icon path="icon/icon.png"/>
 </project>
