@@ -1,7 +1,7 @@
 Have you ever want to put a video on the big screen? Virtually? Did you see anyone do it when hosting movies on SRB2's Master Server and wanted to do it too? Well, introducing...
 # SRB2MovieTool
 ## A tool for Theater.pk3 for Sonic Robo Blast 2
-SRB2MovieTool is a Windows-only tool that's intended for converting videos to [Theater.pk3](https://cdn.discordapp.com/attachments/796954415591981116/1166491613657301032/Theater.pk3), which can be only used in [Sonic Robo Blast 2.](https://srb2.org)
+SRB2MovieTool is a Windows-only tool that's intended for converting videos to [Theater.pk3](https://file.garden/ZLc3VieVhBA68fgj/Theater.pk3), which can be only used in [Sonic Robo Blast 2.](https://srb2.org)
 
 # Installation
 1. Extract the zip file that comes with the tool. (RECOMMENDED)
