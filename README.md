@@ -18,7 +18,7 @@ SRB2MovieTool is a Windows-only tool that's intended for converting videos to [T
 - **Video Title** is the title of the video.
 - Pressing the **Convert** button will use FFmpeg and FFprobe to convert the video and make a Lua file in the `movies` directory, where the output is going to be.
 # Packaging the Output
-1. Inside the folder where it has the video name, you will see three folders; `Lua`, `Music`, and `Textures`. **Verify each folder to make sure it's correct for SRB2 modding.** For example, `OVA00000` should be the first frame. The list goes on until the video ends.
+1. Inside the folder where it has the video name, you will see three folders; `Lua`, `Music`, and `Textures`. **Verify each folder to make sure it has everything.** For example, `OVA00000` should be the first frame. The list goes on until the video ends.
 2. Select all three folders by pressing Ctrl+A to package them.
 3. Right-click the highlighted folders and select `7-Zip > Add to "your video file here.zip"`. **Yes, [7-Zip](https://www.7-zip.org).**
 4. Rename the `zip` to `pk3`. **Make sure you have `File name extensions` checked.**
