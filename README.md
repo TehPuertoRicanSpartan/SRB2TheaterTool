@@ -6,7 +6,7 @@ SRB2MovieTool is a Windows-only tool that's intended for converting videos to [T
 # Installation
 1. Extract the zip file that comes with the tool. (RECOMMENDED)
 2. Download the FFmpeg binaries [here.](https://www.gyan.dev/ffmpeg/builds/)
-3. Find `ffmpeg.exe` and `ffprobe.exe`, then place them in the root file of the tool (where SRB2MovieTool.exe is).
+3. Find `ffmpeg.exe` and `ffprobe.exe`, then place them in the root folder of the tool (where `SRB2MovieTool.exe` is).
 # Tool Usage
 ## You need to fill in fields for every single inputs for:
 - **Video Path** is the path of the video you want to see in SRB2. There's a **Browse** button next to it, so you can browse the video file.
