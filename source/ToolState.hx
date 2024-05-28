@@ -225,11 +225,24 @@ class ToolState extends FlxState
 		Sys.command('mkdir "movies/$filename/Music"');
 		Sys.command('mkdir "movies/$filename/Textures"');
 		Sys.command('mkdir "movies/$filename/Lua"');
+
+		var aspect:Array<String> = ((Util.getCommand('./ffprobe.exe', [
+			'-v',
+			'error',
+			'-select_streams',
+			'v:0',
+			'-show_entries',
+			'stream=display_aspect_ratio',
+			'-of',
+			'default=noprint_wrappers=1:nokey=1',
+			file
+		])).split(':'));
+		var height:Int = Math.round((Std.parseFloat(aspect[1]) / Std.parseFloat(aspect[0])) * outWidth);
 		Sys.command('./ffmpeg.exe', [
 			'-i',
 			file,
-			'-vf',
-			'scale=$outWidth:-1',
+			'-s:v',
+			'${outWidth}x$height',
 			'-r',
 			'$fps',
 			'-start_number',
@@ -246,20 +259,7 @@ class ToolState extends FlxState
 		for (i in 0...numberLength)
 			prefixWithAsteriks += '*';
 
-		var aspect:Array<String> = ((Util.getCommand('./ffprobe.exe', [
-			'-v',
-			'error',
-			'-select_streams',
-			'v:0',
-			'-show_entries',
-			'stream=display_aspect_ratio',
-			'-of',
-			'default=noprint_wrappers=1:nokey=1',
-			file
-		])).split(':'));
-		var height:Int = Std.int(Math.round((Std.parseFloat(aspect[1]) / Std.parseFloat(aspect[0])) * outWidth));
-
-		var duration:Int = Std.int(Math.round(Std.parseFloat(Util.getCommand('./ffprobe.exe', [
+		var duration:Int = Math.round(Std.parseFloat(Util.getCommand('./ffprobe.exe', [
 			'-v',
 			'error',
 			'-show_entries',
@@ -267,7 +267,7 @@ class ToolState extends FlxState
 			'-of',
 			'default=noprint_wrappers=1:nokey=1',
 			file
-		])) * 35));
+		])) * 35);
 
 		var frames:Int = 0;
 		var items:Array<String> = FileSystem.readDirectory('./movies/$filename/Textures');
