@@ -220,9 +220,7 @@ class ToolState extends FlxState
 		var numberLength = 8 - prefix.length;
 
 		var filename_temp = file.split('\\');
-		var filename_temp2:String = filename_temp[filename_temp.length - 1];
-		var filename_temp3 = filename_temp2.split('.');
-		var filename:String = filename_temp3[0];
+		var filename:String = filename_temp[filename_temp.length - 1];
 
 		Sys.command('mkdir "movies/$filename/Music"');
 		Sys.command('mkdir "movies/$filename/Textures"');
