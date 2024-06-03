@@ -19,7 +19,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  buildWindows:
+  build:
     runs-on: windows-latest
 
     steps:
@@ -43,5 +43,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: SRB2MovieTool_Build
+          name: SRB2TheaterTool_Build
           path: export/windows/bin
