@@ -279,7 +279,7 @@ class ToolState extends FlxState
 		pk3.flush();
 		pk3.close();
 
-		Sys.command('rmdir "./movies/${luaID.text}"');
+		Sys.command('rmdir /s "./movies/${luaID.text}"');
 	}
 
 	private function onFileSelected(_)
