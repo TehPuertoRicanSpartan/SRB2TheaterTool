@@ -4,7 +4,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="SRB2TheaterTool" file="SRB2TheaterTool" main="Main" version="0.3.0" company="TehPuertoRicanSpartan" />
+	<app title="SRB2TheaterTool" file="SRB2TheaterTool" main="Main" version="0.4.0" company="TehPuertoRicanSpartan" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
@@ -30,6 +30,7 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
+	<assets path="README.md" />
 	<source path="source" />
 	<assets path="assets" embed="true"/>
 	<assets path="movies" />

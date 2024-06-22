@@ -1,6 +1,6 @@
 package;
 
-import backend.*;
+import util.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
