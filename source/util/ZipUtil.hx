@@ -1,4 +1,4 @@
-package backend; // yes, i "borrowed" it from codename engine
+package util; // yes, i "borrowed" it from codename engine
 
 #if sys
 #if (!macro && sys)
