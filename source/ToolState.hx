@@ -67,7 +67,7 @@ class ToolState extends FlxState
 		toolText.borderSize = 4;
 		toolText.screenCenter(X);
 		add(toolText);
-		var versionText:FlxText = new FlxText(0, toolText.y + (toolText.height - 6), 0, 'v' + Application.current.meta.get('version'), 16);
+		var versionText:FlxText = new FlxText(0, toolText.y + (toolText.height - 6), 0, 'v${Application.current.meta.get('version')} nightly', 16);
 		versionText.setFormat(Util.getFont("sonic-2-system"), 16, 0xFFFFFF00, LEFT, SHADOW, 0xFF272727);
 		versionText.borderSize = 2;
 		versionText.screenCenter(X);
