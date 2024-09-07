@@ -184,6 +184,7 @@ class ToolState extends FlxState
 		\n
 		\nLJ Sonic - Coding the original Theater Lua
 		\nApollyon - Making the original Theater map
+		\nFNF Codename Engine - Zipping utility
 		\n
 		\nFabrice Bellard - Writing FFmpeg
 		\n(without it, this tool wouldn't be possible!)";
