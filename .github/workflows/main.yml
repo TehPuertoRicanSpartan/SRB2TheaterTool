@@ -41,7 +41,7 @@ jobs:
       - name: Compile
         run: haxelib run lime build windows
       - name: Publish Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@main
         with:
           name: SRB2TheaterTool_NightlyBuild
           path: export/windows/bin
