@@ -23,14 +23,12 @@ class Util
 		}
 	}
 
-	public static function getCommand(command:String, args:Array<String>):String
+	public static function getCommand(command:String, ?args:Array<String>):String
 	{
 		try
 		{
-			// Create a new process
 			var process = new sys.io.Process(command, args);
 
-			// Read the standard output
 			var output = process.stdout.readAll().toString();
 			return output;
 		}
