@@ -13,6 +13,8 @@ import openfl.events.Event;
 import openfl.filesystem.File;
 import sys.FileSystem;
 
+using StringTools;
+
 class ToolState extends FlxState
 {
 	var inVideo:File;
@@ -236,11 +238,24 @@ class ToolState extends FlxState
 					file = Util.getCommand("cd") + "/temp/" + (file.split("/"))[(file.split("/")).length - 1];
 				}
 			}
-			
+
+			var aspect:Array<String> = ((Util.getCommand('./ffprobe.exe', [
+				'-v',
+				'error',
+				'-select_streams',
+				'v:0',
+				'-show_entries',
+				'stream=display_aspect_ratio',
+				'-of',
+				'default=noprint_wrappers=1:nokey=1',
+				file
+			])).split(':'));
+			var height:Int = Math.round((Std.parseFloat(aspect[1]) / Std.parseFloat(aspect[0])) * outWidth);
 			Sys.command('./ffmpeg.exe', [
 				'-i',
 				file,
-				'scale=$outWidth:-1',
+				'-s:v',
+				'${outWidth}x$height',
 				'-r',
 				'$fps',
 				'-start_number',
