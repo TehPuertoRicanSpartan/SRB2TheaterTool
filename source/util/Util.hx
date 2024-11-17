@@ -23,7 +23,7 @@ class Util
 		}
 	}
 
-	public static function getCommand(command:String, args:Array<String>):String
+	public static function getCommand(command:String, ?args:Array<String>):String
 	{
 		try
 		{
