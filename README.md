@@ -9,6 +9,7 @@ Zipping utility in this branch is used from [Friday Night Funkin': Codename Engi
 - [YoshiCrafter29](https://github.com/YoshiCrafter29)
 - [NeeEoo](https://github.com/NeeEoo)
 - [Raltyro](https://github.com/Raltyro)
+
 I'm sorry I should've looked in the usage info of the original repo before the release of v0.4.0.
 
 # Installation
