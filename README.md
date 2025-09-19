@@ -1,7 +1,15 @@
+# [THIS PROJECT HAS NOW BEEN DISCONTINUED IN FAVOR OF THE NEW SRB2 MOVIE BUILD. CLICK TO JOIN THE OFFICIAL UGLYKNUX THEATER DISCORD SERVER IN ORDER TO GET THE BUILD AND THE TOOLS NEEDED TO CONVERT A MOVIE.](https://discord.gg/q4dJ7kF9e4)
+
 Have you ever want to put a video on the big screen? Virtually? Did you see anyone do it when hosting movies on SRB2's Master Server and wanted to do it too? Well, introducing...
 # SRB2TheaterTool
 ## A tool for Theater.pk3 for Sonic Robo Blast 2
 SRB2TheaterTool is a Windows-only tool that's intended for converting videos to [Theater.pk3](https://file.garden/ZLc3VieVhBA68fgj/Theater.pk3), which can be only used in [Sonic Robo Blast 2.](https://srb2.org)
+
+Zipping utility in this branch is used from [Friday Night Funkin': Codename Engine](https://github.com/CodenameCrew/CodenameEngine/blob/main/source/funkin/backend/utils/ZipUtil.hx) and is contributed by:
+- [YoshiCrafter29](https://github.com/YoshiCrafter29)
+- [NeeEoo](https://github.com/NeeEoo)
+- [Raltyro](https://github.com/Raltyro)
+I'm sorry I should've looked in the usage info of the original repo before the release of v0.4.0.
 
 # Installation
 1. Extract the zip file that comes with the tool. (RECOMMENDED)
